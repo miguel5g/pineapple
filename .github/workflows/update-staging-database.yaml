@@ -1,0 +1,31 @@
+name: Update staging database
+
+'on':
+  push:
+    branches:
+      - main
+    paths:
+      - src/database/migrations/**
+      - src/database/seeds/**
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+
+    env:
+      SALT_ROUNDS: ${{ secrets.SALT_ROUNDS }}
+      NODE_ENV: staging
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync migrations
+        run: npm run migrate:latest
+
+      # - name: Run seeds
+      #   run: npm run seed:run -- --specific=samples.js
