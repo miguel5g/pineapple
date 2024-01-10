@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/swcrc",
+  "jsc": {
+    "parser": {
+      "syntax": "ecmascript"
+    },
+    "target": "es2022"
+  },
+  "exclude": [".*\\.spec\\.js$", "tests"],
+  "module": {
+    "type": "commonjs"
+  }
+}
